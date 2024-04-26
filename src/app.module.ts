@@ -13,13 +13,13 @@ import { typeormConfig } from './typeorm.config'
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    // TypeOrmModule.forRootAsync({
-    //   inject: [ConfigService],
-    //   useFactory: typeormConfig,
-    //   imports: [],
-    // }),
-    // AuthModule,
-    // UserModule,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: typeormConfig,
+      imports: [],
+    }),
+    AuthModule,
+    UserModule,
   ]
 })
 export class AppModule {}
