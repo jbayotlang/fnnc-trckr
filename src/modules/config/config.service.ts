@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigSchema, ConfigSchemaType } from './config.schema'
 
 @Injectable()
@@ -11,6 +11,13 @@ export class ConfigService {
     }
 
     this.config = ConfigSchema.cast(process.env)
+  }
+
+  public get appConfig() {
+    return {
+      port: this.config.APP_PORT,
+      hostname: this.config.APP_HOSTNAME || null,
+    }
   }
 
   public get jwtConfig() {

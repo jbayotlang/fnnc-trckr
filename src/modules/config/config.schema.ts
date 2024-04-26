@@ -19,6 +19,10 @@ export const ConfigSchema = Yup.object<NodeJS.ProcessEnv>()
 
     // JWT
     JWT_SECRET: Yup.string().required(),
+
+    // APP
+    APP_PORT: Yup.string().required(),
+    APP_HOSTNAME: Yup.string().optional(),
   });
 
 export type ConfigSchemaType = Yup.InferType<typeof ConfigSchema>;
