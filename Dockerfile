@@ -31,5 +31,5 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app /usr/src/app
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 
+CMD ["node", "dist/main.js"]
 EXPOSE 3000
-CMD ["yarn", "typeorm", "migration:run"]
