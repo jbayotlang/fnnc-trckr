@@ -5,7 +5,7 @@ import { Profile } from './user_profile.entity';
 import { Config } from './user_config.entity';
 
 
-@Entity()
+@Entity('users')
 @Unique(['emailAddress', 'username'])
 export class User {
   @PrimaryGeneratedColumn('uuid')

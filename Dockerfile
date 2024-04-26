@@ -6,8 +6,6 @@ LABEL org.opencontainers.image.authors="Jhudiel Bayotlang <sbayotlang@gmail.com>
 # install nestjs/cli globally
 RUN npm i -g nestjs
 
-# install typorm cli globally
-RUN npm i -g typeorm
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -31,5 +29,5 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app /usr/src/app
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 
+CMD ["yarm", "typeorm", "migration:run"]
 EXPOSE 3000
-CMD ["node", "dist/main.js"]

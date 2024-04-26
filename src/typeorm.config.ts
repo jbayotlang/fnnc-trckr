@@ -1,11 +1,14 @@
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import * as path from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { ConfigService as EnvConfigService } from '@modules/config/config.service';
-
 
 export const typeormConfig = (
   configService: EnvConfigService,
 ): TypeOrmModuleOptions => {
+  const entitiesDir = path.resolve(__dirname, 'modules', '**', '**.entity.{ts,js}')
+  const migrationsDir = path.resolve(__dirname, 'migrations', '*.{ts,js}')
+
   const config = {
     type: 'postgres',
     database: configService.typeormConfig.name,
@@ -14,18 +17,8 @@ export const typeormConfig = (
     username: configService.typeormConfig.user,
     password: configService.typeormConfig.password,
     synchronize: false,
-    entities: [
-      "src/modules/**/*.entity.{ts}"
-    ],
-    migrations: [
-      "src/migrations/*.{ts}"
-    ],
-    cli: {
-      "entitiesDir": "src/modules",
-      "migrationsDir": "src/migrations"
-    },
-    autoLoadEntities: true,
-
+    entities: [entitiesDir],
+    migrations: [migrationsDir],
   }
 
   return config as TypeOrmModuleOptions;
